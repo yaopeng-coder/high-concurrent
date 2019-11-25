@@ -1,5 +1,6 @@
 package cn.hust.highconcurrent;
 
+import cn.hust.highconcurrent.annotations.NotThreadSafe;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CountDownLatch;
@@ -13,6 +14,7 @@ import java.util.concurrent.Semaphore;
  * @create: 2019-11-20 12:50
  **/
 @Slf4j
+@NotThreadSafe
 public class ExecutorTest {
 
     //请求总数目
@@ -54,6 +56,7 @@ public class ExecutorTest {
 
         }
 
+        //countdown变为0主线程才可继续运行
         countDownLatch.await();
         executorService.shutdown();
         System.out.println("count="+count);
